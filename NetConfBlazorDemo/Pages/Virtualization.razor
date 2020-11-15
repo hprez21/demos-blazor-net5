@@ -1,0 +1,52 @@
+﻿@page "/virtualization"
+
+<h3>Virtualization</h3>
+
+<!--Table-->
+<table id="employees" class="table">
+    <!--Table head-->
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Company</th>
+        </tr>
+    </thead>
+    <!--Table head-->
+    <!--Table body-->
+    <tbody>
+        @*@foreach (var employee in Employees)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Company</td>
+            </tr>
+        }*@
+        <Virtualize Items="@Employees">
+            <tr>
+                <td>@context.Name</td>
+                <td>@context.Company</td>
+            </tr>
+        </Virtualize>
+    </tbody>
+    <!--Table body-->
+</table>
+<!--Table-->
+
+
+@code {
+
+    public List<Employee> Employees { get; set; } =
+        new List<Employee>();
+
+    public Virtualization()
+    {
+        for (int i = 0; i < 100000; i++)
+        {
+            Employees.Add(new Employee
+            {
+                Name = "Blazor Díaz",
+                Company = "Blazebook"
+            });
+        }
+    }
+}
